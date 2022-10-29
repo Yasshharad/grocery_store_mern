@@ -1,0 +1,43 @@
+.header .navbar li {
+  display: inline-block;
+  color: black;
+  font-size: 1.7rem;
+  margin: 0 1rem;
+}
+
+.header .navbar ul {
+  list-style: none;
+}
+
+.header .navbar li:hover {
+  color: var(--orange);
+}
+
+ul li .dropdown {
+  all: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    position: relative;
+  }
+
+  .header .icons #menu-btn {
+    display: inline-block;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 110%;
+    right: -110%;
+    width: 30rem;
+    background: #fff;
+    border-radius: 0.5rem;
+  }
+
+  .header .navbar li {
+    display: block;
+    font-size: 2rem;
+    margin: 2rem 2.5rem;
+  }
+}
