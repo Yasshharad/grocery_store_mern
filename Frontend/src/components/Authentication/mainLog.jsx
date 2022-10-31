@@ -20,7 +20,7 @@ function MainLog() {
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("userInfo"));
 
-        if (user) navigate("/login");
+        if (user) navigate("/loginCustomer");
     }, [history]);
 
     return (

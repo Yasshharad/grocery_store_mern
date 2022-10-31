@@ -1,3 +1,4 @@
+const farmerRoutes = require("./routes/farmerRoutes");
 const express = require("express");
 const connectDB = require("./config/db");
 const bodyParser = require("body-parser");
@@ -24,6 +25,10 @@ app.use(bodyParser.json());
 // });
 
 app.use("/api/user", userRoutes);
+
+// farmer
+app.use("/api/farmers", farmerRoutes);
+
 
 // --------------------------deployment------------------------------
 
@@ -57,7 +62,7 @@ const server = app.listen(
 const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "http://localhost:3000",
+        origin: "http://localhost:3000/",
         // credentials: true,
     },
 });

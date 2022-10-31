@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './SearchForm.css';
 
-export default function SearchForm(props) {
+export default function SearchForm(props, { setSearch }) {
   const { active } = props;
   return (
     <>
       <form action="" className={`search-form ${active ? 'active' : ''}`}>
         <label htmlFor="search-box">
-          <input type="search" placeholder="search here..." id="search-box" />
+          <input type="search" placeholder="search here..." id="search-box" onChange={(e) => setSearch(e.target.value)} />
           <FontAwesomeIcon className="search-icon" icon={faSearch} />
         </label>
       </form>

@@ -1,10 +1,26 @@
 // Navbar
 import { BrowserRouter, Link } from 'react-router-dom';
 import './Navbar.css';
-import React from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import React, { useEffect } from 'react';
+import {
+  Nav,
+  NavDropdown,
+} from "react-bootstrap";
+import { logout } from "../../FarmerAuthentication/actions/userAction";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
+  useEffect(() => { }, [userInfo]);
+
   return (
     <nav className="navbar">
       <ul>
@@ -24,28 +40,64 @@ export default function Navbar() {
           <Link to="/blogs" >Blogs</Link>
         </li>
         <li>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              <Link to="/login" >Login(Customer)</Link>
-            </Dropdown.Toggle>
+          <Nav>
+            {userInfo ? (
+              <>
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/profile">
+                    {/* <img
+                      alt=""
+                      src={`${userInfo.pic}`}
+                      width="25"
+                      height="25"
+                      style={{ marginRight: 10 }}
+                    /> */}
+                    My Profile
+                  </NavDropdown.Item>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">My Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/loginCustomer">Login(Customer)</Nav.Link>
+            )}
+          </Nav>
         </li>
         <li>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              <Link to="/loginFarmer" >Login(Farmer)</Link>
-            </Dropdown.Toggle>
+          <Nav>
+            {userInfo ? (
+              <>
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/profile">
+                    {/* <img
+                      alt=""
+                      src={`${userInfo.pic}`}
+                      width="25"
+                      height="25"
+                      style={{ marginRight: 10 }}
+                    /> */}
+                    My Profile
+                  </NavDropdown.Item>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">My Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/login">Login(Farmer)</Nav.Link>
+            )}
+          </Nav>
         </li>
       </ul>
     </nav>
