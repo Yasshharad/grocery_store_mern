@@ -14,7 +14,7 @@ const app = express();
 // app.use(express.json()); // to accept json data
 app.use(
     bodyParser.urlencoded({
-        extended: false
+        extended: true, parameterLimit: 100000, limit: "500mb"
     })
 );
 

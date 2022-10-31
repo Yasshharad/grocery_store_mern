@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading/loading";
 import ErrorMessage from "../ErrorMessage/errorMessage";
 import { register } from "../actions/userAction";
+import { useNavigate } from 'react-router-dom';
 import "./farmerSignup.css";
 
-function RegisterScreen({ history }) {
+function RegisterScreen() {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [pic, setPic] = useState(
@@ -19,9 +20,9 @@ function RegisterScreen({ history }) {
     const [picMessage, setPicMessage] = useState(null);
 
     const dispatch = useDispatch();
-
-    const userRegister = useSelector((state) => state.userRegister);
-    const { loading, error, userInfo } = userRegister;
+    const navigate = useNavigate();
+    const farmerRegister = useSelector((state) => state.farmerRegister);
+    const { loading, error, farmerInfo } = farmerRegister;
 
     const postDetails = (pics) => {
         if (
@@ -54,9 +55,9 @@ function RegisterScreen({ history }) {
 
     useEffect(() => {
         if (userInfo) {
-            history.push("/");
+            navigate("/");
         }
-    }, [history, userInfo]);
+    }, [navigate, farmerInfo]);
 
     const submitHandler = (e) => {
         e.preventDefault();

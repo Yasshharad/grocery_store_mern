@@ -15,12 +15,15 @@ export default function Navbar() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const farmerLogin = useSelector((state) => state.farmerLogin);
+  const farmerInfo = farmerLogin;
+
   const logoutHandler = () => {
     dispatch(logout());
   };
 
   useEffect(() => { }, [userInfo]);
-
+  useEffect(() => { }, [farmerInfo]);
   return (
     <nav className="navbar">
       <ul>
@@ -46,15 +49,14 @@ export default function Navbar() {
                 <NavDropdown
                   title={`${userInfo.name}`}
                   id="collasible-nav-dropdown"
-                >
+                ><img
+                    alt=""
+                    src={`${userInfo.pic}`}
+                    width="25"
+                    height="25"
+                    style={{ marginRight: 10 }}
+                  />
                   <NavDropdown.Item href="/profile">
-                    {/* <img
-                      alt=""
-                      src={`${userInfo.pic}`}
-                      width="25"
-                      height="25"
-                      style={{ marginRight: 10 }}
-                    /> */}
                     My Profile
                   </NavDropdown.Item>
 
@@ -71,20 +73,19 @@ export default function Navbar() {
         </li>
         <li>
           <Nav>
-            {userInfo ? (
+            {farmerInfo ? (
               <>
                 <NavDropdown
-                  title={`${userInfo.name}`}
+                  title={`${farmerInfo.name}`}
                   id="collasible-nav-dropdown"
-                >
+                >  <img
+                    alt=""
+                    src={`${farmerInfo.pic}`}
+                    width="25"
+                    height="25"
+                    style={{ marginRight: 10 }}
+                  />
                   <NavDropdown.Item href="/profile">
-                    {/* <img
-                      alt=""
-                      src={`${userInfo.pic}`}
-                      width="25"
-                      height="25"
-                      style={{ marginRight: 10 }}
-                    /> */}
                     My Profile
                   </NavDropdown.Item>
 

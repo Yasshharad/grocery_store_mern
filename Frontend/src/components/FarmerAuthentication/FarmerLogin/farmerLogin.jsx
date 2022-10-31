@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 import Loading from "../Loading/loading";
 import ErrorMessage from "../ErrorMessage/errorMessage";
 import { login } from "../actions/userAction";
+import { useNavigate } from 'react-router-dom';
 import "./farmerLogin.css";
 
-function LoginScreen({ history }) {
+function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const farmerLogin = useSelector((state) => state.farmerLogin);
     const farmerInfo = farmerLogin;
@@ -20,9 +22,9 @@ function LoginScreen({ history }) {
 
     useEffect(() => {
         if (farmerInfo) {
-            history.push("/");
+            navigate("/");
         }
-    }, [history, farmerInfo]);
+    }, [navigate, farmerInfo]);
 
     const submitHandler = (e) => {
         e.preventDefault();

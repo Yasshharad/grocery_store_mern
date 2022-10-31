@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../FarmerAuthentication/actions/userAction";
 import Loading from "../../FarmerAuthentication/Loading/loading";
 import ErrorMessage from "../../FarmerAuthentication/ErrorMessage/errorMessage";
+import { useNavigate } from 'react-router-dom';
 
-const ProfileScreen = ({ location, history }) => {
+const ProfileScreen = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pic, setPic] = useState();
@@ -15,6 +16,7 @@ const ProfileScreen = ({ location, history }) => {
     const [picMessage, setPicMessage] = useState();
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const farmerLogin = useSelector((state) => state.farmerLogin);
     const farmerInfo = farmerLogin;
@@ -26,13 +28,13 @@ const ProfileScreen = ({ location, history }) => {
 
     useEffect(() => {
         if (!farmerInfo) {
-            history.push("/");
+            navigate("/");
         } else {
             setName(farmerInfo.name);
             setEmail(farmerInfo.email);
             setPic(farmerInfo.pic);
         }
-    }, [history, farmerInfo]);
+    }, [navigate, farmerInfo]);
 
     const postDetails = (pics) => {
         setPicMessage(null);
