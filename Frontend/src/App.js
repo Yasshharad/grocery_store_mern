@@ -1,20 +1,21 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import Home from './components/Home/Home';
 import Features from './components/Features/Features';
 import Products from './components/Products/Products';
 import Reviews from './components/Reviews/Reviews';
 import Blogs from './components/Blogs/Blogs';
-import { Route, Routes, Router } from "react-router-dom";
-import MainLog from './components/Authentication/mainLog';
-import LoginScreen from './components/FarmerAuthentication/FarmerLogin/farmerLogin';
-import './App.css';
-import RegisterScreen from './components/FarmerAuthentication/FarmerSignUp/farmerSignup';
+import { Route, Routes } from "react-router-dom";
 import SearchForm from './components/Header/SearchForm/SearchForm';
-import ProfileScreen from './components/FarmerAuthentication/ProfileScreen/ProfileScreen';
-
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+// import { GlobalState } from './GlobalState';
+// import UserAPI from './api/userAPI';
+import './App.css';
 
 function App() {
+  // const state = useContext(GlobalState);
+  // const [isLogged] = state.userAPI.isLogged;
   return (
     <div className="app">
       <SearchForm setSearch={(s) => setSearch(s)} />
@@ -24,10 +25,8 @@ function App() {
         <Route path="products" element={<Products />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/loginCustomer" element={<MainLog />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/register" element={<RegisterScreen />} />
-        <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );
