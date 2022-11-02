@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/user', require('./routes/userRouter'))
+app.use('/farmer', require('./routes/farmerRouter'))
 
 
 const mongoose = require('mongoose')

@@ -32,6 +32,7 @@ export default function Navbar() {
           <Link to="/blogs" >Blogs</Link>
         </li>
         <li><Link to="/login">Login(Customer)</Link></li>
+        <li><Link to="/loginFarmer">Login(farmer)</Link></li>
       </ul>
     </nav >
   );
