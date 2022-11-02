@@ -16,27 +16,38 @@ export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: USER_LOGIN_REQUEST });
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
+        // const config = {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // };
 
-        const { data } = await axios.post(
-            "/api/farmers/login",
+        axios.post(
+            "http://localhost:4000/api/farmers/login",
             { email, password },
-            config
-        );
+            // config
+        ).then((res) => { console.log(res) });
 
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+        // loginFarmer = () => {
+        //     axios
+        //         .post("http://localhost:4000/api/farmers", { email, password },)
+        //         .then((res) => {
+        //             self.setState({
+        //                 employees: res.data,
+        //             });
+        //         });
+        // };
 
-        localStorage.setItem("farmerInfo", JSON.stringify(data));
+
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: res });
+
+        localStorage.setItem("farmerInfo", JSON.stringify(res));
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
             payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
+                error.response && error.response.res.message
+                    ? error.response.res.message
                     : error.message,
         });
     }
@@ -51,29 +62,29 @@ export const register = (name, email, password, pic) => async (dispatch) => {
     try {
         dispatch({ type: USER_REGISTER_REQUEST });
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
+        // const config = {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // };
 
-        const { data } = await axios.post(
-            "/api/farmers",
+        axios.post(
+            "http://localhost:4000/api/farmers",
             { name, pic, email, password },
-            config
-        );
+            // config
+        ).then((res) => { console.log(res) });
 
-        dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+        dispatch({ type: USER_REGISTER_SUCCESS, payload: res });
 
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: res });
 
-        localStorage.setItem("farmerInfo", JSON.stringify(data));
+        localStorage.setItem("farmerInfo", JSON.stringify(res));
     } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
             payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
+                error.response && error.response.res.message
+                    ? error.response.res.message
                     : error.message,
         });
     }
@@ -94,19 +105,54 @@ export const updateProfile = (farmer) => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post("/api/farmers/profile", farmer, config);
+        axios.post("http://localhost:4000/api/farmers/profile", farmer, config).then((res) => { console.log(res) });
 
-        dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
+        dispatch({ type: USER_UPDATE_SUCCESS, payload: res });
 
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: res });
 
-        localStorage.setItem("farmerInfo", JSON.stringify(data));
+        localStorage.setItem("farmerInfo", JSON.stringify(res));
     } catch (error) {
         dispatch({
             type: USER_UPDATE_FAIL,
             payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
+                error.response && error.response.res.message
+                    ? error.response.res.message
+                    : error.message,
+        });
+    }
+};
+
+export const updateProfileUser = (user) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: USER_UPDATE_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        axios.post("http://localhost:4000/api/users/profile", user,
+            config
+        ).then((res) => { console.log(res) });
+
+        dispatch({ type: USER_UPDATE_SUCCESS, payload: res });
+
+        dispatch({ type: USER_LOGIN_SUCCESS, payload: res });
+
+        localStorage.setItem("userInfo", JSON.stringify(res));
+    } catch (error) {
+        dispatch({
+            type: USER_UPDATE_FAIL,
+            payload:
+                error.response && error.response.res.message
+                    ? error.response.res.message
                     : error.message,
         });
     }

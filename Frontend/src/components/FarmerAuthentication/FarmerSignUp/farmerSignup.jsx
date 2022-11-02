@@ -22,7 +22,9 @@ function RegisterScreen() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const farmerRegister = useSelector((state) => state.farmerRegister);
-    const { loading, error, farmerInfo } = farmerRegister;
+    const loading = farmerRegister;
+    const error = farmerRegister;
+    const farmerInfo = farmerRegister;
 
     const postDetails = (pics) => {
         if (
@@ -54,7 +56,7 @@ function RegisterScreen() {
     };
 
     useEffect(() => {
-        if (userInfo) {
+        if (farmerInfo) {
             navigate("/");
         }
     }, [navigate, farmerInfo]);
@@ -74,7 +76,7 @@ function RegisterScreen() {
                 {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
                 {loading && <Loading />}
                 <Form onSubmit={submitHandler}>
-                    <Form.Group Id="name">
+                    <Form.Group id="name">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type="name"
@@ -84,7 +86,7 @@ function RegisterScreen() {
                         />
                     </Form.Group>
 
-                    <Form.Group Id="formBasicEmail">
+                    <Form.Group id="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
                         <Form.Control
                             type="email"
@@ -94,7 +96,7 @@ function RegisterScreen() {
                         />
                     </Form.Group>
 
-                    <Form.Group Id="formBasicPassword">
+                    <Form.Group id="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type="password"
@@ -104,7 +106,7 @@ function RegisterScreen() {
                         />
                     </Form.Group>
 
-                    <Form.Group Id="confirmPassword">
+                    <Form.Group id="confirmPassword">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control
                             type="password"
@@ -117,7 +119,7 @@ function RegisterScreen() {
                     {picMessage && (
                         <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
                     )}
-                    <Form.Group Id="pic">
+                    <Form.Group id="pic">
                         <Form.Label>Profile Picture</Form.Label>
                         <Form.Control
                             onChange={(e) => postDetails(e.target.files[0])}

@@ -45,22 +45,22 @@ const Signup = () => {
 		}
 		console.log(name, email, password, pic);
 		try {
-			const config = {
-				headers: {
-					"Content-Type": "application/json",
-				},
-			};
-			const { data } = await axios.post(
-				"/api/user",
+			// const config = {
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// };
+			axios.post(
+				"http://localhost:4000/api/user",
 				{
 					name,
 					email,
 					password,
-					pic,
+					pic
 				},
-				config
-			);
-			console.log(data);
+				//config
+			).then((res) => { console.log(res) })
+			// console.log(data);
 			toast({
 				title: "Registration Successful",
 				status: "success",
@@ -189,7 +189,8 @@ const Signup = () => {
 				colorScheme="blue"
 				width="100%"
 				style={{ marginTop: 15 }}
-				onClick={submitHandler}
+				onClick={(e) => submitHandler()}
+				// onClick={submitHandler}
 				isLoading={picLoading}
 			>
 				Sign Up
