@@ -1,7 +1,6 @@
 {
   "name": "agro-grocery",
   "version": "0.1.0",
-  "proxy": "http://127.0.0.1:5000/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.3.6",
@@ -22,6 +21,7 @@
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.31.8",
     "framer-motion": "^7.6.1",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-validation": "^0.1.11",
@@ -31,7 +31,7 @@
     "react-redux": "^8.0.4",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-slick": "^0.29.0",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",

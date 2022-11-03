@@ -7,28 +7,36 @@ import Reviews from './components/Reviews/Reviews';
 import Blogs from './components/Blogs/Blogs';
 import { Route, Routes } from "react-router-dom";
 import SearchForm from './components/Header/SearchForm/SearchForm';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
+import Login from './components/mainpages/auth/Login';
+import Register from './components/mainpages/auth/Register';
 // import { GlobalState } from './GlobalState';
 // import UserAPI from './api/userAPI';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { DataProvider } from './GlobalState';
+import Header from './components/Header/Header';
+import Pages from './components/mainpages/Pages';
 import './App.css';
 
 function App() {
   // const state = useContext(GlobalState);
   // const [isLogged] = state.userAPI.isLogged;
   return (
-    <div className="app">
-      <SearchForm setSearch={(s) => setSearch(s)} />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/feature" element={<Features />} />
-        <Route path="products" element={<Products />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </div>
+    <DataProvider>
+      <div className="app">
+        <SearchForm setSearch={(s) => setSearch(s)} />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/feature" element={<Features />} />
+          <Route path="products" element={<Products />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/Header" element={<Header />} />
+          <Route path="/Pages" element={<Pages />} />
+        </Routes>
+      </div>
+    </DataProvider>
   );
 }
 
